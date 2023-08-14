@@ -6,16 +6,22 @@ import {
   Param,
   Patch,
   Post,
+  HttpCode,
 } from '@nestjs/common';
 
 @Controller('/events')
 export class EventsController {
   @Get()
-  findAll() {}
+  findAll() {
+    return [
+      { id: 1, name: 'First event' },
+      { id: 2, name: 'Second event' },
+    ];
+  }
 
   @Get(':id')
   findOne(@Param('id') id) {
-    return id;
+    return { id: 1, name: 'First event' };
   }
 
   //lesson 3-16 request body
@@ -30,6 +36,7 @@ export class EventsController {
   }
 
   @Delete(':id')
+  @HttpCode(204)
   remove(@Param('id') id) {
     return id;
   }
